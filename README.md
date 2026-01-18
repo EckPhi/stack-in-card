@@ -1,4 +1,5 @@
-# Stack In Card by [@RomRider](https://www.github.com/RomRider)
+# Stack In Card (unofficial) by [@RomRider](https://www.github.com/RomRider)
+Additional Mods by @ov1d1u and @stickpin
 
 A replacement for [vertical-stack-in-card](https://github.com/ofekashery/vertical-stack-in-card) and `horizontal-stack-in-card`
 
