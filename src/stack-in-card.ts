@@ -39,6 +39,10 @@ class StackInCard extends LitElement implements LovelaceCard {
     `;
   }
 
+  static getConfigElement() {
+    return document.createElement('hui-stack-card-editor');
+  }
+
   public setConfig(config: StackInCardConfig): void {
     if (!config.cards) {
       throw new Error(`There is no cards parameter defined`);
@@ -51,6 +55,7 @@ class StackInCard extends LitElement implements LovelaceCard {
         margin: false,
         box_shadow: false,
         border_radius: false,
+        border: false,
         ...config.keep,
       },
     };
@@ -96,6 +101,9 @@ class StackInCard extends LitElement implements LovelaceCard {
   private _updateStyle(e: LovelaceCard | null, withBg: boolean): void {
     if (!e) return;
     if (!this._config?.keep?.box_shadow) e.style.boxShadow = 'none';
+    if (!this._config?.keep?.border && getComputedStyle(e).getPropertyValue('--keep-border').trim() !== 'true') {
+      e.style.border = 'none';
+    }
     if (
       !this._config?.keep?.background &&
       withBg &&

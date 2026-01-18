@@ -1,6 +1,6 @@
 {
   "name": "stack-in-card",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Stack in Card for Home Assistant's Lovelace UI",
   "main": "dist/stack-in-card.js",
   "pre-commit": [
@@ -24,7 +24,7 @@
     "lovelace",
     "custom-cards"
   ],
-  "author": "Jérôme Wiedemann <jerome@wnetworks.org>",
+  "author": "Artur Pragacz <artur@pragacz.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/custom-cards/stack-in-card/issues"
