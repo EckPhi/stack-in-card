@@ -1,30 +1,9 @@
-import {
-  LitElement,
-  customElement,
-  property,
-  TemplateResult,
-  html,
-  css,
-  CSSResult,
-  PropertyValues,
-  query,
-} from 'lit-element';
+import { createThing, HomeAssistant, LovelaceCard, LovelaceCardConfig } from 'custom-card-helpers';
+import { css, CSSResult, customElement, html, LitElement, property, PropertyValues, TemplateResult } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import {
-  HomeAssistant,
-  LovelaceCardConfig,
-  createThing,
-  LovelaceCard,
-  LovelaceCardEditor,
-  LovelaceConfig,
-  fireEvent,
-  HASSDomEvent,
-} from 'custom-card-helpers';
-import { HaFormSchema, StackInCardConfig } from './types';
 import * as pjson from '../package.json';
-import { mdiCodeBraces, mdiDelete, mdiListBoxOutline, mdiPlus } from '@mdi/js';
-import { nothing } from 'lit-html';
-
+import './stack-in-card-editor';
+import { StackInCardConfig } from './types';
 console.info(
   `%c STACK-IN-CARD \n%c   Version ${pjson.version}   `,
   'color: orange; font-weight: bold; background: black',
@@ -75,9 +54,8 @@ class StackInCard extends LitElement implements LovelaceCard {
   }
 
   static getConfigElement() {
-    return document.createElement('hui-stack-card-editor');
+    return document.createElement('stack-in-card-editor');
   }
-
   public setConfig(config: StackInCardConfig): void {
     if (!config.cards) {
       throw new Error(`There is no cards parameter defined`);
@@ -103,12 +81,17 @@ class StackInCard extends LitElement implements LovelaceCard {
     super.updated(changedProperties);
     if (!this._card) return;
     this._waitForChildren(this._card, false);
+    if (this._card?.shadowRoot) {
+      const stackRoot = this._card.shadowRoot.getElementById('root');
+      if (stackRoot) stackRoot.style.gap = '0px';
+    }
     window.setTimeout(() => {
       if (!this._config?.keep?.background) this._waitForChildren(this._card, true);
       if (this._config?.keep?.outer_padding && this._card?.shadowRoot) {
         const stackRoot = this._card.shadowRoot.getElementById('root');
         if (stackRoot) stackRoot.style.padding = '8px';
       }
+
     }, 500);
   }
 
